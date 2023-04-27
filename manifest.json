@@ -1,0 +1,10 @@
+{
+  "reusable-workflows": { 
+    "src-type": "git",
+    "src": "gal-halevi/reusable-workflows"
+  },
+  "deploy-to-azure": {
+    "src-type": "git",
+    "src": "gal-halevi/deploy-to-azure"
+  }
+}
