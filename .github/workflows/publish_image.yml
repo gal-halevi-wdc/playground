@@ -19,7 +19,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ghcr.io/${{ github.repository }}/generate-workflow
+          images: ghcr.io/${{ github.repository }}/python-script
           tags: type=sha
           
       - name: Login to GHCR
