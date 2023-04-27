@@ -3,7 +3,7 @@ name: Generate checkout workflow
 on:
   push:
     paths:
-     - '.devops/manifest.json'
+     - 'manifest.json'
 
   workflow_dispatch:
 
@@ -24,7 +24,7 @@ jobs:
         run: pip install ruamel.yaml
 
       - name: Run script to generate workflow
-        run: python .devops/generate_workflow.py
+        run: python generate_workflow.py
         
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
