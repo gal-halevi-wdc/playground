@@ -11,17 +11,12 @@ jobs:
   Generate-checkout-workflow:
     runs-on: ubuntu-latest
     
+    container: ghcr.io/${{ github.repository }}:latest
+    
     steps:
       - uses: actions/checkout@v3
         with:
           token: ${{secrets.GENERATE_WORKFLOW}}
-      
-      - uses: actions/setup-python@v4
-        with:
-          python-version: '3.8'
-          
-      - name: Install Python dependencies 
-        run: pip install ruamel.yaml
 
       - name: Run script to generate workflow
         run: python generate_workflow.py
