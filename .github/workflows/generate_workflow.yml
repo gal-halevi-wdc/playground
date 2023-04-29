@@ -10,10 +10,7 @@ on:
 jobs:
   Generate-checkout-workflow:
     runs-on: ubuntu-latest
-    # Container need to run with bash shell for git-auto-commit-action
-    defaults:
-      run:
-        shell: bash
+    
     container: ghcr.io/${{ github.repository }}:latest
     
     steps:
