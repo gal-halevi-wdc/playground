@@ -10,20 +10,22 @@ on:
 jobs:
   Generate-checkout-workflow:
     runs-on: ubuntu-latest
-    # Container need to run with bash shell for git-auto-commit-action
-    defaults:
-      run:
-        shell: bash
-    container: ghcr.io/${{ github.repository }}:latest
     
     steps:
       - uses: actions/checkout@v3
         with:
           token: ${{secrets.GENERATE_WORKFLOW}}
+      
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+          
+      - name: Install Python dependencies 
+        run: pip install ruamel.yaml
 
       - name: Run script to generate workflow
         run: python generate_workflow.py
         
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: Generate workflow
+          commit_message: "[CI] Generate workflow - ${{github.run_number}}"
