@@ -1,0 +1,8 @@
+name: CodeQL
+on:
+ workflow_dispatch:
+jobs:
+  test:
+    uses: .github/workflows/dynamic_matrix.yml@main
+    with:
+      languageJson: '["csharp", "javascript"]'
