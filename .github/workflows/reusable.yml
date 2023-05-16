@@ -3,6 +3,6 @@ on:
  workflow_dispatch:
 jobs:
   test:
-    uses: .github/workflows/dynamic_matrix.yml@main
+    uses: ./.github/workflows/dynamic_matrix.yml
     with:
       languageJson: '["csharp", "javascript"]'
