@@ -4,9 +4,11 @@ on:
 jobs:
   job1:
     runs-on: ubuntu-latest
-    env:
-      FOO_PATH: foo
     steps:
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.8.10'
+          
       - run: |
-          mkdir $FOO_PATH
-          cd $FOO_PATH
+          pip list
+          py -3 -E -m pip list
