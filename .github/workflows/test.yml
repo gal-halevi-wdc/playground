@@ -9,6 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo ${{ env.foo }}
-          echo ${{ env.bar }}
+          echo ${{ env.FOO }}
+          echo ${{ env.BAR }}
     
