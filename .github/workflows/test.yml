@@ -6,9 +6,7 @@ env:
   BAR: bar
 jobs:
   job1:
-    runs-on: ubuntu-latest
-    steps:
-      - run: |
-          echo ${{ env.FOO }}
-          echo ${{ env.BAR }}
+    uses: ./.github/workflows/dynamic_matrix.yml
+    with:
+      languageJson: ${{ env.FOO }}
     
