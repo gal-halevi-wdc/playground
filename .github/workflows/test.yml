@@ -1,0 +1,14 @@
+name: test
+on: 
+  workflow_dispatch:
+env:
+  FOO: foo
+  BAR: bar
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo ${{ env.foo }}
+          echo ${{ env.bar }}
+    
