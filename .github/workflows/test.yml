@@ -22,9 +22,9 @@ jobs:
     runs-on: windows-latest
     strategy:
       matrix:
-        build_config: ${{ needs.job1.outputs.configs }}
+        build_config: ${{ fromJSON(needs.job1.outputs.configs) }}
         
     steps:
       - run: |
-          echo {{ fromJSON(matrix.build_config) }}
+          echo {{ matrix.build_config }}
     
