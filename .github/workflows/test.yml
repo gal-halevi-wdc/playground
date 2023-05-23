@@ -8,6 +8,8 @@ jobs:
     outputs:
       configs: ${{ steps.values.outputs.values_list }}
     steps:
+      - uses: actions/checkout@v3
+        
       - name: get matrix values
         id: values
         run: |
