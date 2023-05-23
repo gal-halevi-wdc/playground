@@ -7,14 +7,16 @@ jobs:
     runs-on: windows-latest
     outputs:
       configs: ${{ steps.values.outputs.values_list }}
+    env:
+      foo: '["dsf", "vax", "vcv", "bar"]'
     steps:
       - uses: actions/checkout@v3
         
       - name: get matrix values
         id: values
         run: |
-          $values = python get_dict_values.py
-          $values = ${{ toJSON(env.values) }}
+          $values = ${{ toJSON(env.foo) }}
+          echo $values
           echo "values_list=$values" >> "$GITHUB_OUTPUT"
         
   jobs2:
