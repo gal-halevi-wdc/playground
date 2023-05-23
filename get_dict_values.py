@@ -12,5 +12,5 @@ a = {"production": {"hw": "foo", "livet": "bar"}, "dummy": {"hw": "baz"},
      "production_3_0": {"hw": {"foo": {"bar": "bar"}}}}
 
 vl = []
-
-print(get_values(a, vl))
+get_values(a, vl)
+print(vl)
