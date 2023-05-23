@@ -26,5 +26,5 @@ jobs:
         
     steps:
       - run: |
-          echo {{ matrix.build_config }}
+          echo {{ fromJSON(matrix.build_config) }}
     
