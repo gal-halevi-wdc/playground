@@ -1,12 +1,27 @@
 name: test
 on: 
   workflow_dispatch:
-env:
-  FOO: foo
-  BAR: bar
+
 jobs:
   job1:
-    uses: ./.github/workflows/dynamic_matrix.yml
-    with:
-      languageJson: ${{ env.FOO }}
+    runs-on: windows-latest
+    outputs:
+      configs: ${{ steps.values.outputs.values_list }}
+    steps:
+      - name: get matrix values
+        id: values
+        run: |
+          $values = get_dict_values.py
+          echo "values_list=$values" >> "$GITHUB_OUTPUT"
+        
+  jobs2:
+    needs: job1
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        build_config: ${{ needs.job1.outputs.configs }}
+        
+    steps:
+      - run: |
+          echo {{ matrix.build_config }}
     
