@@ -11,7 +11,8 @@ jobs:
       - name: get matrix values
         id: values
         run: |
-          $values = get_dict_values.py
+          $values = python get_dict_values.py
+          echo $values
           echo "values_list=$values" >> "$GITHUB_OUTPUT"
         
   jobs2:
