@@ -14,7 +14,7 @@ jobs:
         id: values
         run: |
           $values = python get_dict_values.py
-          echo $values
+          $values = $ {{ toJSON($values) }}
           echo "values_list=$values" >> "$GITHUB_OUTPUT"
         
   jobs2:
