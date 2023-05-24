@@ -11,7 +11,7 @@ env:
   foo: configs.builds.${{ inputs.build_config }}
 jobs:
   job1:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - run: |
-          echo ${{ env.foo }}
+          echo $env:foo
