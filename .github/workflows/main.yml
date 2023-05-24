@@ -1,17 +1,11 @@
 name: build
 on: 
   workflow_dispatch:
-    inputs:
-      build_config:
-        type: string
-        description: Build configuration
-        default: foo_hw_dbsd
         
-env:
-  foo: configs.builds.${{ inputs.build_config }}
 jobs:
   job1:
     runs-on: windows-latest
     steps:
       - run: |
-          echo $env:foo
+          echo "vars.foo = ${{ vars.foo }}"
+          echo "vars:foo = $vars:foo"
