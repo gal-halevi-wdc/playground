@@ -1,11 +1,17 @@
 name: build
 on: 
   workflow_dispatch:
+    inputs:
+      build_config:
+        type: string
+        description: Build configuration
+        default: foo_hw_dbsd
+        
+env:
+  foo: configs.builds.${{ inputs.build_config }}
 jobs:
   job1:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo "run_id = " ${{ github.run_id }}
-          echo "run_number = " ${{ github.run_number }}
-          echo "run_attempt = " ${{ github.run_attempt }}
+          echo $env:foo
