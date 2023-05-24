@@ -1,8 +1,10 @@
 name: CodeQL
 on:
  workflow_dispatch:
+env:
+ foo: '["csharp", "javascript"]'
 jobs:
   test:
     uses: ./.github/workflows/dynamic_matrix.yml
     with:
-      languageJson: '["csharp", "javascript"]'
+      languageJson: ${{ env.foo }}
