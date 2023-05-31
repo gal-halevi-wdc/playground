@@ -14,10 +14,12 @@ jobs:
     steps:
       - run: |
           echo "input=${{ inputs.is_dummy }}"
-          if ($is_dummy -ieq "true") {
+          if ($is_dummy -ieq "true") 
+          {
             $dummy_arg = "--dummy"
           }
-          else {
+          else 
+          {
             $dummy_arg = "foo"
           }
           "DUMMY_ARG=$dummy_arg" >> $env:GITHUB_ENV
