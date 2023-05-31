@@ -17,9 +17,9 @@ jobs:
           echo "input=${{ inputs.is_dummy }}"
           
           if [ "${{ inputs.is_dummy }}" = "true" ]; then
-              $dummy_arg = "--dummy"
+              export dummy_arg = "--dummy"
           else
-              $dummy_arg = "foo"
+              export dummy_arg = "foo"
           fi
           
           echo "DUMMY_ARG=$dummy_arg" >> "$GITHUB_ENV"
