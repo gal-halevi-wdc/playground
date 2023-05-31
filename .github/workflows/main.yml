@@ -3,9 +3,9 @@ on:
   workflow_dispatch:
     inputs:
       is_dummy:
-        type: string
+        type: "string"
         description: Dummy build?
-        default: false
+        default: "false"
     
         
 jobs:
