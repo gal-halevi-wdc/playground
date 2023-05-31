@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       is_dummy:
-        type: boolean
+        type: string
         description: Dummy build?
         default: false
     
