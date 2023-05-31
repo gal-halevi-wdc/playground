@@ -12,17 +12,29 @@ jobs:
   job1:
     runs-on: windows-latest
     steps:
-      - run: |
+      - shell: bash
+        run: |
           echo "input=${{ inputs.is_dummy }}"
-          if (${{ inputs.is_dummy }} -ieq "true") 
-          {
-            $dummy_arg = "--dummy"
-          }
-          else 
-          {
-            $dummy_arg = "foo"
-          }
-          "DUMMY_ARG=$dummy_arg" >> $env:GITHUB_ENV
+          
+          if [ "${{ inputs.is_dummy }}" = "true" ]; then
+              $dummy_arg = "--dummy"
+          else
+              $dummy_arg = "foo"
+          fi
+          
+          echo "DUMMY_ARG=$dummy_arg" >> "$GITHUB_ENV"
+
+#         run: |
+#           echo "input=${{ inputs.is_dummy }}"
+#           if (${{ inputs.is_dummy }} -ieq "true") 
+#           {
+#             $dummy_arg = "--dummy"
+#           }
+#           else 
+#           {
+#             $dummy_arg = "foo"
+#           }
+#           "DUMMY_ARG=$dummy_arg" >> $env:GITHUB_ENV
           
       - run: |
           echo ${{ env.DUMMY_ARG }}
