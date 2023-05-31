@@ -13,6 +13,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - run: |
+          echo "is_dummy(from inputs)=${{ inputs.is_dummy }}"
           $is_dummy = ${{ inputs.is_dummy }}
           echo "is_dummy=$is_dummy"
           $is_dummy.GetType()
