@@ -15,7 +15,7 @@ jobs:
       - run: |
           echo "is_dummy(from inputs)=${{ inputs.is_dummy }}"
           $is_dummy = ${{ inputs.is_dummy }}
-          echo "is_dummy=$is_dummy"
+          echo "is_dummy=$(is_dummy)"
           $is_dummy.GetType()
           if ($is_dummy.Tolower() -eq "true") {
             $dummy_arg = "--dummy"
