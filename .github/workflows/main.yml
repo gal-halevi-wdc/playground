@@ -21,7 +21,7 @@ jobs:
             $dummy_arg = "--dummy"
           }
           else {
-            $dummy_arg = ""
+            $dummy_arg = "foo"
           }
           "DUMMY_ARG=$dummy_arg" >> $env:GITHUB_ENV
           
