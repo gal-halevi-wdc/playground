@@ -1,11 +1,25 @@
 name: build
 on: 
   workflow_dispatch:
+    inputs:
+      is_dummy:
+        type: boolean
+        description: Dummy build?
+        default: false
+    
         
 jobs:
   job1:
     runs-on: windows-latest
     steps:
       - run: |
-          echo "vars.foo = ${{ vars.foo }}"
-          echo "vars:foo = $vars:foo"
+          if (${{ inputs.is_dummy }}) {
+            $dummy_arg = --dummy
+          }
+          else {
+            $dummy_arg = ""
+          }
+          "DUMMY_ARG=$dummy_arg" >> $env:GITHUB_ENV
+          
+      - run: |
+          echo $env:DUMMY_ARG
