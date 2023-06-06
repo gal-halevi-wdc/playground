@@ -13,16 +13,25 @@ jobs:
     runs-on: windows-latest
     steps:
       - shell: bash
+        env: 
+          my_sec: ${{ toJson(secrets) }}
         run: |
-          echo "input=${{ inputs.is_dummy }}"
+          echo ${{ env.my_sec }}
+        
+        
+        
+        
+        
+#         run: |
+#           echo "input=${{ inputs.is_dummy }}"
           
-          if [ "${{ inputs.is_dummy }}" = "true" ]; then
-              dummy_arg="--dummy"
-          else
-              dummy_arg="foo"
-          fi
+#           if [ "${{ inputs.is_dummy }}" = "true" ]; then
+#               dummy_arg="--dummy"
+#           else
+#               dummy_arg="foo"
+#           fi
           
-          echo "DUMMY_ARG=$dummy_arg" >> "$GITHUB_ENV"
+#           echo "DUMMY_ARG=$dummy_arg" >> "$GITHUB_ENV"
 
 #         run: |
 #           echo "input=${{ inputs.is_dummy }}"
