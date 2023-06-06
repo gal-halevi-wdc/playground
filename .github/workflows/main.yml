@@ -12,11 +12,12 @@ jobs:
   job1:
     runs-on: windows-latest
     steps:
-      - shell: bash
-        env: 
-          my_sec: ${{ toJson(secrets) }}
-        run: |
-          echo ${{ env.my_sec }}
+      - name: view the secrets context
+        shell: bash
+        run: echo "$SECRETS_CONTEXT"
+        env:
+          SECRETS_CONTEXT: ${{ toJson(secrets) }}
+
         
         
         
