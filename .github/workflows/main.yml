@@ -12,11 +12,15 @@ jobs:
   job1:
     runs-on: windows-latest
     steps:
-      - name: view the secrets context
-        shell: bash
-        run: echo "$SECRETS_CONTEXT"
-        env:
-          SECRETS_CONTEXT: ${{ toJson(secrets) }}
+#       - name: view the secrets context
+#         shell: bash
+#         run: echo "$SECRETS_CONTEXT"
+#         env:
+#           SECRETS_CONTEXT: ${{ toJson(secrets) }}
+      - run: |
+          echo run_id=${{ github.run_id }}
+          echo run_number=${{ github.run_number }}
+          echo run_attempt=${{ github.run_attempt }}
 
         
         
