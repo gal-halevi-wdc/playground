@@ -50,5 +50,5 @@ jobs:
 #           }
 #           "DUMMY_ARG=$dummy_arg" >> $env:GITHUB_ENV
           
-      - run: |
-          echo ${{ env.DUMMY_ARG }}
+#       - run: |
+#           echo ${{ env.DUMMY_ARG }}
