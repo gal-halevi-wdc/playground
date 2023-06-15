@@ -9,6 +9,6 @@ env:
  foo: '["csharp", "javascript"]'
 jobs:
   test:
-    uses: gal-halevi-wdc/playground/.github/workflows/dynamic_matrix.yml@"${{ inputs.branch }}"
+    uses: gal-halevi-wdc/playground/.github/workflows/dynamic_matrix.yml@"${{inputs.branch}}"
     with:
       languageJson: ${{ env.foo }}
