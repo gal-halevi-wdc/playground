@@ -1,10 +1,14 @@
 name: CodeQL
 on:
  workflow_dispatch:
+  inputs:
+   branch:
+    type: string
+    default: main
 env:
  foo: '["csharp", "javascript"]'
 jobs:
   test:
-    uses: ./.github/workflows/dynamic_matrix.yml
+    uses: gal-halevi-wdc/playground/.github/workflows/dynamic_matrix.yml@${{ inputs.branch }}
     with:
       languageJson: ${{ env.foo }}
