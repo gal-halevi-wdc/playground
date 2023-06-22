@@ -12,7 +12,7 @@ jobs:
   job1:
     runs-on: windows-latest
     env:
-      foo: fromJSON('["danger", "good"]')[0 == 0]
+      foo: fromJSON('{"false": "danger", "true": "good"}')[0 == 0]
     steps:
 #       - name: view the secrets context
 #         shell: bash
