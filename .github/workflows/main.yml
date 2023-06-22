@@ -12,7 +12,7 @@ jobs:
   job1:
     runs-on: windows-latest
     env:
-      foo: fromJSON('{"false":"danger","true":"good"}')[0 == 0]
+      foo: "${{ inputs.is_dummy == 'true' && 'onprem' || 'cloud' }}"
     steps:
 #       - name: view the secrets context
 #         shell: bash
