@@ -11,9 +11,10 @@ on:
 #   runner_comfig: ${{ fromJSON(vars.RUNNER_CONF) }}
 jobs:
   job1:
-    runs-on: ${{ fromJSON(vars.RUNNER_CONF).cloud.runs-on }}
     env:
-      foo: "${{ inputs.is_dummy == 'true' && 'onprem' || 'cloud' }}"
+      platform: "${{ inputs.is_dummy == 'true' && 'onprem' || 'cloud' }}"
+      runner_conf: ${{ fromJSON(vars.RUNNER_CONF) }}
+    runs-on: ${{ env.runner_conf[env.platform]["runs-on"] }}
     steps:
 #       - name: view the secrets context
 #         shell: bash
