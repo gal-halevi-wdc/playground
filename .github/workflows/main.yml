@@ -7,8 +7,8 @@ on:
         description: Dummy build?
         default: 'true'
     
-env:
-  runner_comfig: ${{ fromJSON(vars.RUNNER_CONF) }}
+# env:
+#   runner_comfig: ${{ fromJSON(vars.RUNNER_CONF) }}
 jobs:
   job1:
     runs-on: ${{ fromJSON(vars.RUNNER_CONF).cloud.runs-on }}
