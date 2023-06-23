@@ -14,7 +14,7 @@ jobs:
     env:
       platform: "${{ inputs.is_dummy == 'true' && 'onprem' || 'cloud' }}"
       runner_conf: ${{ fromJSON(vars.RUNNER_CONF) }}
-    runs-on: ${{ fromJSON(vars.RUNNER_CONF)[inputs.is_dummy == 'true' && 'onprem' || 'cloud']["runs-on"] }}
+    runs-on: ${{ fromJSON(vars.RUNNER_CONF)[inputs.is_dummy == 'true' && 'onprem' || 'cloud'].runs-on}}
     steps:
 #       - name: view the secrets context
 #         shell: bash
