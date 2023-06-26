@@ -24,8 +24,9 @@ jobs:
 #         run: echo "$SECRETS_CONTEXT"
 #         env:
 #           SECRETS_CONTEXT: ${{ toJson(secrets) }}
-      - run: |
+      - name: Foo
         if: env.runner_env == 'cloud'
+        run: |
           echo "foo=${{ env.runner_env }}"
 
         
