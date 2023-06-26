@@ -8,8 +8,8 @@ on:
         default: 'true'
     
 env:
-  runner_comfig: ${{ fromJSON(vars.RUNNER_CONF) }}
-  test_release_to_env: '{"true": "onprem", "false": "cloud"}'
+#   runner_comfig: ${{ fromJSON(vars.RUNNER_CONF) }}
+#   test_release_to_env: '{"true": "onprem", "false": "cloud"}'
   runner_env: ${{ inputs.is_dummy == 'true' && 'onprem' || 'cloud' }}
 jobs:
   job1:
