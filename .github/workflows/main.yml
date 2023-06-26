@@ -9,13 +9,15 @@ on:
     
 env:
   runner_comfig: ${{ fromJSON(vars.RUNNER_CONF) }}
-  env_runner: ${{ fromJSON('{"true": "onprem", "false": "cloud"}') }}
+  test_release_to_env: '{"true": "onprem", "false": "cloud"}'
+  runner_env: ${{ inputs.is_dummy == 'true' && 'onprem' || 'cloud'] }}
 jobs:
   job1:
 #     env:
 #       platform: "${{ inputs.is_dummy == 'true' && 'onprem' || 'cloud' }}"
 #       runner_conf: ${{ fromJSON(vars.RUNNER_CONF) }}
-    runs-on: ${{ fromJSON(vars.RUNNER_CONF)[inputs.is_dummy == 'true' && 'onprem' || 'cloud'].runs-on}}
+#     runs-on: ${{ fromJSON(vars.RUNNER_CONF)[inputs.is_dummy == 'true' && 'onprem' || 'cloud'].runs-on}}
+    runs-on: windows-latest
     steps:
 #       - name: view the secrets context
 #         shell: bash
@@ -23,7 +25,7 @@ jobs:
 #         env:
 #           SECRETS_CONTEXT: ${{ toJson(secrets) }}
       - run: |
-          echo "foo=${{ env.foo }}"
+          echo "foo=${{ env.runner_env }}"
 
         
         
