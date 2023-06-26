@@ -25,6 +25,7 @@ jobs:
 #         env:
 #           SECRETS_CONTEXT: ${{ toJson(secrets) }}
       - run: |
+        if: env.runner_env == 'cloud'
           echo "foo=${{ env.runner_env }}"
 
         
