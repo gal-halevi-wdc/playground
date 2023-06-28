@@ -25,6 +25,7 @@ jobs:
         run: |
           foo="foobar"
           echo "bar=$foo" >> $GITHUB_OUTPUT
+          echo "bar=$bar"
       - name: Foo
 #         if: env.runner_env == 'cloud'
         run: |
