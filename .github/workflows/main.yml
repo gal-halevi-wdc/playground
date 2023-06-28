@@ -7,27 +7,28 @@ on:
         description: Dummy build?
         default: 'true'
     
-env:
+# env:
 #   runner_comfig: ${{ fromJSON(vars.RUNNER_CONF) }}
 #   test_release_to_env: '{"true": "onprem", "false": "cloud"}'
-  runner_env: ${{ inputs.is_dummy == 'true' && 'onprem' || 'cloud' }}
+#   runner_env: ${{ inputs.is_dummy == 'true' && 'onprem' || 'cloud' }}
 jobs:
   job1:
 #     env:
 #       platform: "${{ inputs.is_dummy == 'true' && 'onprem' || 'cloud' }}"
 #       runner_conf: ${{ fromJSON(vars.RUNNER_CONF) }}
-    runs-on: ${{ fromJSON(vars.RUNNER_CONF)[inputs.is_dummy == 'true' && 'onprem' || 'cloud'].runs-on}}
-#     runs-on: windows-latest
+#     runs-on: ${{ fromJSON(vars.RUNNER_CONF)[inputs.is_dummy == 'true' && 'onprem' || 'cloud'].runs-on}}
+    runs-on: windows-latest
     steps:
-#       - name: view the secrets context
-#         shell: bash
-#         run: echo "$SECRETS_CONTEXT"
-#         env:
-#           SECRETS_CONTEXT: ${{ toJson(secrets) }}
-      - name: Foo
-        if: env.runner_env == 'cloud'
+      - name: set output
+        id: setfoo
+        shell: bash
         run: |
-          echo "foo=${{ env.runner_env }}"
+          foo="foobar"
+          echo $foo >> $GITHUB_OUTPUT
+      - name: Foo
+#         if: env.runner_env == 'cloud'
+        run: |
+          echo "foo=${{ steps.setfoo.outputs.foo }}"
 
         
         
