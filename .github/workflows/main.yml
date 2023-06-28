@@ -24,11 +24,11 @@ jobs:
         shell: bash
         run: |
           foo="foobar"
-          echo $foo >> $GITHUB_OUTPUT
+          echo "bar=$foo" >> $GITHUB_OUTPUT
       - name: Foo
 #         if: env.runner_env == 'cloud'
         run: |
-          echo "foo=${{ steps.setfoo.outputs.foo }}"
+          echo "foo=${{ steps.setfoo.outputs.bar }}"
 
         
         
