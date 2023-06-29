@@ -21,15 +21,14 @@ jobs:
     steps:
       - name: set output
         id: setfoo
+        if: false
         shell: bash
         run: |
-          foo="foobar"
-          echo "bar=$foo" >> $GITHUB_OUTPUT
-          echo "bar=$bar"
+          echo "false"
       - name: Foo
 #         if: env.runner_env == 'cloud'
         run: |
-          echo "foo=${{ steps.setfoo.outputs.bar }}"
+          echo "true"
 
         
         
