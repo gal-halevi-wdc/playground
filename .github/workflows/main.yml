@@ -7,10 +7,11 @@ on:
         description: Dummy build?
         default: 'true'
     
-# env:
+env:
 #   runner_comfig: ${{ fromJSON(vars.RUNNER_CONF) }}
 #   test_release_to_env: '{"true": "onprem", "false": "cloud"}'
 #   runner_env: ${{ inputs.is_dummy == 'true' && 'onprem' || 'cloud' }}
+  release_type: ${{ fromJSON('{"true":"test","false":"official"}')[inputs.is_dummy] }}
 jobs:
   job1:
 #     env:
@@ -21,14 +22,13 @@ jobs:
     steps:
       - name: set output
         id: setfoo
-        if: false
         shell: bash
         run: |
-          echo "false"
-      - name: Foo
-#         if: env.runner_env == 'cloud'
-        run: |
-          echo "true"
+          echo "release_type=$release_type"
+#       - name: Foo
+# #         if: env.runner_env == 'cloud'
+#         run: |
+#           echo "true"
 
         
         
