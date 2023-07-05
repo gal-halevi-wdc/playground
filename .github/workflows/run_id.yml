@@ -15,3 +15,6 @@ jobs:
         
       - name: repo url
         run: echo "url=${{ github.repositoryUrl }}"
+        
+      - name: repo ref
+        run: echo "ref=${{ github.ref }}"
