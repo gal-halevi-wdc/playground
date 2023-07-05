@@ -1,0 +1,11 @@
+name: IDs
+on: 
+  workflow_dispatch:
+
+jobs:
+  ShowIDs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: rund_id = ${{ github.run_id }}
+      - name: rund_id = ${{ github.run_number }}
+      - name: rund_id = ${{ github.run_attempt }}
