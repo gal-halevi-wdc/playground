@@ -3,9 +3,9 @@ on:
   workflow_dispatch:
     inputs:
       is_dummy:
-        type: string
+        type: boolean
         description: Dummy build?
-        default: 'true'
+        default: true
     
 env:
 #   runner_comfig: ${{ fromJSON(vars.RUNNER_CONF) }}
@@ -21,10 +21,10 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: set output
-        id: setfoo
+        if: inputs.is_dummy
         shell: bash
         run: |
-          echo "release_type=$release_type"
+          echo "hello"
 #       - name: Foo
 # #         if: env.runner_env == 'cloud'
 #         run: |
