@@ -22,9 +22,10 @@ jobs:
     steps:
       - name: set output
         if: inputs.is_dummy
-        shell: bash
-        run: |
-          echo "hello"
+        uses: actions/checkout@v3
+#         shell: bash
+#         run: |
+#           echo "hello"
 #       - name: Foo
 # #         if: env.runner_env == 'cloud'
 #         run: |
