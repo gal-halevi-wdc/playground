@@ -14,3 +14,5 @@ a = {"production": {"hw": "foo", "livet": "bar"}, "dummy": {"hw": "baz"},
 vl = []
 get_values(a, vl)
 print(vl)
+
+#foo
