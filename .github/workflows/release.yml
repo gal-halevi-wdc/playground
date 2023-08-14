@@ -5,6 +5,8 @@ on:
 jobs:
   Release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Create release
         env:
