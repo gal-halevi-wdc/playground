@@ -1,0 +1,22 @@
+name: Update
+on:
+  push:
+    branches:
+      - 'main'
+    paths:
+      - '.github/workflows/release_pckg.yml'
+
+jobs:
+  Update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        
+      - name: Update change
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git cherry-pick -x ${{ github.sha }}
+          git push
+    
