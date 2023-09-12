@@ -17,6 +17,10 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-          git cherry-pick -x ${{ github.sha }}
-          git push
-    
+          for branch in $(git for-each-ref refs/heads/* | cut -d"$(printf '\t')" -f2 | cut -b12-)
+          do
+              echo "branch=$branch"
+              git checkout $branch
+              git cherry-pick -x ${{ github.sha }}
+              git push
+          done
