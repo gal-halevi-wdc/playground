@@ -21,6 +21,6 @@ jobs:
           do
               echo "branch=$branch"
               git checkout $branch
-              git cherry-pick -x ${{ github.sha }}
+              git cherry-pick -x --allow-empty --strategy-option theirs ${{ github.sha }}
               git push
           done
