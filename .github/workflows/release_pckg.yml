@@ -9,5 +9,5 @@ jobs:
       - name: Package
         run: echo "Package"
 
-      - name: Deploy 
+      - name: Deploy
         run: echo "Deploy"
