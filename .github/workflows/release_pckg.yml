@@ -8,3 +8,6 @@ jobs:
     steps:
       - name: Package
         run: echo "Package"
+
+      - name: Deploy
+        run: echo "Deploy"
