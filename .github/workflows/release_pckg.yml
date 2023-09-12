@@ -10,4 +10,4 @@ jobs:
         run: echo "Package"
 
       - name: Deploy
-        run: echo "Deploy "
+        run: echo "Deploy"
