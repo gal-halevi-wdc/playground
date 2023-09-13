@@ -10,7 +10,7 @@ jobs:
     env:
       foo: '["dsf", "vax", "vcv", "bar"]'
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         
       - name: get matrix values
         id: values
