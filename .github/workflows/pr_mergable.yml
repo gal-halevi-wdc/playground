@@ -5,10 +5,16 @@ on:
 jobs:
   PullRequestMergable:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.mergeable
     steps:
+      - name: Print the Github Context
+        shell: bash
+        run: echo "$GITHUB_CONTEXT"
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+          
       - name: Checkout
         uses: actions/checkout@v3
 
       - name: Create Label
+        if: github.event.pull_request.mergeable
         run: gh pr edit ${{ github.event.number }} --add-label "Ready for merge"
