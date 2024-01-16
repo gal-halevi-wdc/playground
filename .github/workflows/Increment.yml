@@ -23,3 +23,4 @@ jobs:
           git add -u
           git commit -m "increment"
           git push origin $BRANCH_NAME
+          gh pr create --title "Increment version" --body $VER
