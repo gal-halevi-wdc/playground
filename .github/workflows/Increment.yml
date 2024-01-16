@@ -1,0 +1,25 @@
+name: "Increment"
+on:
+  push:
+    branches:
+      - 'main'
+jobs:
+  check-title:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Commit & push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          VER=$(cat version)
+          BRANCH_NAME=increment-$VER
+          git switch -c $BRANCH_NAME
+          VER=$((VER+=1))
+          echo $VER > version
+          git add -u
+          git commit -m "increment"
+          git push origin $BRANCH_NAME
