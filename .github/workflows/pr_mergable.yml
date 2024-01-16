@@ -1,0 +1,14 @@
+name: Pull Request Mergable
+on:
+  pull_request_review:
+    types: ['submitted']
+jobs:
+  PullRequestMergable:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.mergeable
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Create Label
+        run: gh pr edit ${{ github.event.number }} --add-label "Ready for merge"
