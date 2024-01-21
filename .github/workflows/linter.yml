@@ -1,0 +1,43 @@
+name: Linter
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+jobs:
+  Lint:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Install python2.7 & pip
+        run: |
+          sudo apt -y install python2.7
+          curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py
+          python2.7 get-pip.py
+
+      - name: Install flake8 & plugins
+        run: |
+          pip install flake8 pep8-naming==0.12.1 flake8-builtins==1.5.3 flake8-comprehensions
+          python2.7 -m pip list
+
+      - name: Run Lint
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        # || true is for avoiding grep exit code 1 when there's no match
+        run: |
+          FILES_TO_SCAN=$(git diff --diff-filter=d --name-only origin/${{ github.base_ref }} | grep .py || true)
+          if [ -z "$FILES_TO_SCAN" ]; then
+            echo "No files to scan"
+            exit 0
+          fi
+          flake8 --max-line-length 180 --tee --output-file report $FILES_TO_SCAN || EXIT_CODE=$?
+          if [ $EXIT_CODE ]; then
+            gh pr comment $PR_NUMBER -b "[Issues found](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})<br/><br/>**Please fix:**<br/>$(cat report)"
+            cat report >> "$GITHUB_STEP_SUMMARY"
+            exit $EXIT_CODE
+          fi
