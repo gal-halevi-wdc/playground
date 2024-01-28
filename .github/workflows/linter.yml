@@ -38,7 +38,7 @@ jobs:
           fi
           flake8 --max-line-length 180 --tee --output-file report $FILES_TO_SCAN || EXIT_CODE=$?
           if [ $EXIT_CODE ]; then
-            gh pr comment $PR_NUMBER -b "[Issues found]($JOB_URL)<br/><br/>**Please fix:**<br/>$(cat report)"
+            gh pr comment $PR_NUMBER -b "## [Lint errors]($JOB_URL)<br/>$(cat report)"
             cat report >> "$GITHUB_STEP_SUMMARY"
             exit $EXIT_CODE
           fi
