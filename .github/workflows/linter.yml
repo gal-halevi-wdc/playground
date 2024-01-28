@@ -21,7 +21,7 @@ jobs:
 
       - name: Install flake8 & plugins
         run: |
-          pip install flake8 pep8-naming==0.12.1 flake8-builtins==1.5.3 flake8-comprehensions
+          pip install flake8==3.9.2 pep8-naming==0.12.1 flake8-builtins==1.5.3 flake8-comprehensions
           python2.7 -m pip list
 
       - name: Run Lint
