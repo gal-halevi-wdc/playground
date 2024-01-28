@@ -1,3 +1,3 @@
 class BarFoo():
-  def fooBar(s):
-    print "fooBar"
+    def fooBar(s):
+        print "fooBar"
