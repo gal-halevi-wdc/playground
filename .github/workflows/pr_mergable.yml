@@ -1,20 +1,23 @@
-name: Pull Request Mergable
+name: Check PR Mergeability
 on:
   pull_request_review:
-    types: ['submitted']
 jobs:
-  PullRequestMergable:
+  TriggerMergeLabel:
+    if: github.event.review.state != 'commented'
     runs-on: ubuntu-latest
+    env:
+      PR_NUMBER: ${{ github.event.pull_request.number }}
+      GH_TOKEN: ${{ github.token }}
     steps:
       - name: Print the Github Context
         shell: bash
         run: echo "$GITHUB_CONTEXT"
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
-          
-      - name: Checkout
-        uses: actions/checkout@v3
 
-      - name: Create Label
-        if: github.event.pull_request.mergeable
-        run: gh pr edit ${{ github.event.number }} --add-label "Ready for merge"
+      - uses: actions/checkout@v3
+          
+      - name: Trigger workflow
+        continue-on-error: true
+        run: |
+          echo "{\"pull_request_number\":\"$PR_NUMBER\"}" | gh workflow run manage_label.yml --json

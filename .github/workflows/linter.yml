@@ -2,7 +2,8 @@ name: Linter
 on:
   pull_request:
     types: [opened, reopened, synchronize]
-
+    branches:
+     - 'main'
 jobs:
   Lint:
     runs-on: ubuntu-latest
@@ -21,23 +22,25 @@ jobs:
 
       - name: Install flake8 & plugins
         run: |
-          pip install flake8 pep8-naming==0.12.1 flake8-builtins==1.5.3 flake8-comprehensions
+          pip install flake8==3.9.2 pep8-naming==0.12.1 flake8-builtins==1.5.3 flake8-comprehensions
           python2.7 -m pip list
 
       - name: Run Lint
         env:
           GH_TOKEN: ${{ github.token }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
+          JOB_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         # || true is for avoiding grep exit code 1 when there's no match
         run: |
-          FILES_TO_SCAN=$(git diff --diff-filter=d --name-only origin/${{ github.base_ref }} | grep .py || true)
+          FILES_TO_SCAN=$(git diff --diff-filter=d --name-only origin/$GITHUB_BASE_REF | grep .py || true)
           if [ -z "$FILES_TO_SCAN" ]; then
             echo "No files to scan"
             exit 0
           fi
           flake8 --max-line-length 180 --tee --output-file report $FILES_TO_SCAN || EXIT_CODE=$?
           if [ $EXIT_CODE ]; then
-            gh pr comment $PR_NUMBER -b "[Issues found](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})<br/><br/>**Please fix:**<br/>$(cat report)"
+            COMMENT_BODY=$(echo -e "## [Lint errors]($JOB_URL)\n$(cat report)")
+            gh pr comment $PR_NUMBER -b "$COMMENT_BODY"
             cat report >> "$GITHUB_STEP_SUMMARY"
             exit $EXIT_CODE
           fi
