@@ -38,7 +38,7 @@ jobs:
             echo "No files to scan"
             exit 0
           fi
-          flake8 --max-line-length 180 --tee --output-file report $FILES_TO_SCAN || EXIT_CODE=$?
+          flake8 --ignore-names "setUp,tearDown,[Ss]eq_*" --max-line-length 180 --tee --output-file report $FILES_TO_SCAN || EXIT_CODE=$?
           if [ $EXIT_CODE ]; then
             COMMENT_BODY=$(echo -e "## [Lint errors]($JOB_URL)\n$(cat report)")
             gh pr comment $PR_NUMBER -b "$COMMENT_BODY"
