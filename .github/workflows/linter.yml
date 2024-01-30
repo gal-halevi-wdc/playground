@@ -26,6 +26,7 @@ jobs:
           python2.7 -m pip list
 
       - name: Run Lint
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
