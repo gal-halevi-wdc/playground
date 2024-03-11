@@ -17,7 +17,9 @@ jobs:
 
           const jiraPattern = /[A-Z]+[0-9]*-[0-9]+: /g
           if (!jiraPattern.test(prTitle)) {
-            core.summary.write("fail")
-            core.summary.write('PR title is not valid. Title should start with the following regex: ${repos.length}')
+            await core.summary
+            .addRaw("fail")
+            .addRaw('PR title is not valid. Title should start with the following regex: ${repos.length}')
+            .write()
             core.setFailed()
           }
