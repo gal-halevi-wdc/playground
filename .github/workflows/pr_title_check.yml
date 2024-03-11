@@ -18,6 +18,6 @@ jobs:
 
           const jiraPattern = /[A-Z]+[0-9]*-[0-9]+: /g
           if (!jiraPattern.test(prTitle)) {
-            core.summary.write('PR title is not valid. Title should start with the following regex: ' + jiraPattern)
+            core.summary.addRaw('PR title is not valid. Title should start with the following regex: ' + jiraPattern, true)
             core.setFailed()
           }
