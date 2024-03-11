@@ -19,6 +19,7 @@ jobs:
           if (!jiraPattern.test(prTitle)) {
             await core.summary
             .addRaw(`PR title is not valid. Title should start with the following regex: ${jiraPattern}`)
+            .addRaw("For example: `UFS-1234: `")
             .write()
             core.setFailed()
           }
