@@ -2,8 +2,8 @@ name: "PR Title Check"
 on:
   pull_request:
     types: [opened, reopened, edited, synchronize]
-    paths:
-      - '!.github/**'
+    paths-ignore:
+      - '.github/**'
 jobs:
   check-title:
     runs-on: ubuntu-latest
