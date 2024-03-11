@@ -1,7 +1,7 @@
 name: "PR Title Check"
 on:
   pull_request:
-    types: [opened, edited, synchronize]
+    types: [opened, reopened, edited, synchronize]
 jobs:
   check-title:
     runs-on: ubuntu-latest
