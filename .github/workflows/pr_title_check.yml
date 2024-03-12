@@ -17,10 +17,10 @@ jobs:
 
           const jiraPattern = /[A-Z]+[0-9]*-[0-9]+: /g
           if (!jiraPattern.test(prTitle)) {
+            const errorMsg = `PR title \`${prTitle}\` is not valid.\nTitle should start with the following regex: \`${jiraPattern}\`\nFor example: \`UFS-1234: \``
             await core.summary
-            .addRaw(`PR title \`${prTitle}\` is not valid.`).addEOL() 
-            .addRaw(`Title should start with the following regex: \`${jiraPattern}\``).addEOL()
-            .addRaw("For example: `UFS-1234: `").addEOL()
+            .addRaw(errorMsg).addEOL() 
             .write()
+            console.log(errorMsg)
             core.setFailed()
           }
