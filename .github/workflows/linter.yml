@@ -37,7 +37,7 @@ jobs:
           flake8 --ignore-names "setUp,tearDown,[Ss]eq_*" --max-line-length 180 --tee --output-file report $FILES_TO_SCAN || EXIT_CODE=$?
           COMMENT_BODY=$(echo "## [Lint summary]($JOB_URL)")
           if [ $EXIT_CODE ]; then
-            COMMENT_BODY+=$(echo -e "\n$(cat report)")
+            COMMENT_BODY="$COMMENT_BODY"$(echo -e "\n$(cat report)")
             cat report >> "$GITHUB_STEP_SUMMARY"
             exit $EXIT_CODE
           else
