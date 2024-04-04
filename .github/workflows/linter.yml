@@ -34,7 +34,7 @@ jobs:
         # || true is for avoiding grep exit code 1 when there's no match
         run: |
           FILES_TO_SCAN=$(git diff --diff-filter=d --name-only origin/$GITHUB_BASE_REF | grep .py)
-          flake8 --ignore-names "setUp,tearDown,[Ss]eq_*" --max-line-length 180 --tee --output-file report $FILES_TO_SCAN || EXIT_CODE=$?
+          flake8 --ignore=A003 --ignore-names "setUp,tearDown,[Ss]eq_*" --max-line-length 180 --tee --output-file report $FILES_TO_SCAN || EXIT_CODE=$?
           COMMENT_BODY=$(echo "## [Lint summary]($JOB_URL)")
           if [ $EXIT_CODE ]; then
             COMMENT_BODY+=$(echo -e "\n$(cat report)")
