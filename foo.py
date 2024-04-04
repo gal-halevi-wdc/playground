@@ -1,4 +1,5 @@
 import os
 import sys
 
-print "foo"
+print sys
+print os
