@@ -10,7 +10,7 @@ jobs:
     permissions:
       pull-requests: write
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -33,15 +33,14 @@ jobs:
           JOB_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         # || true is for avoiding grep exit code 1 when there's no match
         run: |
-          FILES_TO_SCAN=$(git diff --diff-filter=d --name-only origin/$GITHUB_BASE_REF | grep .py || true)
-          if [ -z "$FILES_TO_SCAN" ]; then
-            echo "No files to scan"
-            exit 0
-          fi
+          FILES_TO_SCAN=$(git diff --diff-filter=d --name-only origin/$GITHUB_BASE_REF | grep .py)
           flake8 --ignore-names "setUp,tearDown,[Ss]eq_*" --max-line-length 180 --tee --output-file report $FILES_TO_SCAN || EXIT_CODE=$?
+          COMMENT_BODY=$(echo -e "## [Lint summary]($JOB_URL)")
           if [ $EXIT_CODE ]; then
-            COMMENT_BODY=$(echo -e "## [Lint errors]($JOB_URL)\n$(cat report)")
-            gh pr comment $PR_NUMBER -b "$COMMENT_BODY"
+            COMMENT_BODY+=$(echo -e "#\n$(cat report)")
             cat report >> "$GITHUB_STEP_SUMMARY"
             exit $EXIT_CODE
+          else
+            COMMENT_BODY+=$(echo -e "\nNo issues found! :partying_face:")
           fi
+          gh pr comment $PR_NUMBER -b "$COMMENT_BODY"
