@@ -8,6 +8,7 @@ yml_file = YAML()
 yml_file.default_flow_style = True
 template = yml_file.load(yaml_file)
 
+
 with open("manifest.json") as manifest_file:
     manifest = json.load(manifest_file)
 
