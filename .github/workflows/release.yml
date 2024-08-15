@@ -12,7 +12,7 @@ jobs:
       - name: Create release
         env:
           GH_TOKEN: ${{ github.token }}
-          RELEASE_URL: https://www.google.com/release/foo-official-2.0.6.zip
+          RELEASE_URL: https://www.google.com/release/foo-official-2.0.7.zip
         run: |
           filename=$(basename $RELEASE_URL)
           tag="${filename%.*}"
