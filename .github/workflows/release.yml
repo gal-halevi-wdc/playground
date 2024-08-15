@@ -8,9 +8,13 @@ jobs:
     permissions:
       contents: write
     steps:
+      - uses: actions/checkout@v4
       - name: Create release
         env:
           GH_TOKEN: ${{ github.token }}
-          tag: v1.0.${{ github.run_number }}
+          RELEASE_URL: https://www.google.com/release/foo-official-2.0.5.zip
         run: |
-          gh release create "$tag" --generate-notes --repo="$GITHUB_REPOSITORY"
+          filename=$(basename $RELEASE_URL)
+          tag="${filename%.*}"
+          info=$(cat env.txt)
+          gh release create "$tag" --generate-notes -n $info
