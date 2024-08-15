@@ -14,6 +14,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           RELEASE_URL: https://www.google.com/release/foo-official-2.0.5.zip
         run: |
+          cat env.txt
           filename=$(basename $RELEASE_URL)
           tag="${filename%.*}"
           info=$(cat env.txt)
