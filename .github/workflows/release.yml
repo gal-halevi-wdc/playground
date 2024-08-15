@@ -17,4 +17,5 @@ jobs:
           filename=$(basename $RELEASE_URL)
           tag="${filename%.*}"
           info=$(cat env.txt)
-          gh release create "$tag" --generate-notes -n "$info"
+          latest_tag=$(git describe --tags --abbrev=0)
+          gh release create "$tag" --generate-notes -n "$info" --notes-start-tag "$latest_tag"
