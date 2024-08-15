@@ -3,22 +3,7 @@ on:
   workflow_dispatch:
   
 jobs:
-  Release:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Create release
-        env:
-          GH_TOKEN: ${{ github.token }}
-          RELEASE_URL: https://www.google.com/release/foo-official-2.1.1.zip
-        run: |
-          filename=$(basename $RELEASE_URL)
-          tag="${filename%.*}"
-          info=$(cat env.txt)
-          latest_tag=$(git describe --tags --abbrev=0)
-          echo "$tag $latest_tag"
-          gh release create "$tag" --generate-notes -n "$info" --notes-start-tag "$latest_tag"
+  Release-Notes:
+    uses: fpe-products/PLATFORM-platform-vld-meta_data/.github/workflows/release_notes.yml@UFS-20010-align-all-platforms-repos-workflows
+    with:
+      tag: foo-official-2.1.2
