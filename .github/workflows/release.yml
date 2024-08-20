@@ -1,9 +1,27 @@
 name: Release
 on:
   workflow_dispatch:
+    inputs:
+      tag:
+        type: string
   
 jobs:
+  generate-notes:
+    runs-on: ubuntu-latest
+    outputs:
+      notes: ${{ steps.notes.outputs.notes }}
+    steps:
+      - id: notes
+        run: |
+          log_info=$(cat log)
+          notes="<details>
+                 <summary>reproduction.yml</summary>"
+          notes+=$(yq '.steps[] | select(.uses == "actions/checkout*") | (.with.repository + ": " + .with.ref)' env.yml)
+          notes+="</details>"
+          echo "notes=$notes" >> $GITHUB_OUTPUT
   Release-Notes:
+    needs: generate-notes
     uses: fpe-products/PLATFORM-platform-vld-meta_data/.github/workflows/release_notes.yml@UFS-20010-align-all-platforms-repos-workflows
     with:
-      tag: foo-official-2.1.2
+      tag: ${{ inputs.tag }}
+      notes: ${{ needs.generate-notes.outputs.notes }}
