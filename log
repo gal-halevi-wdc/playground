@@ -1,0 +1,9 @@
+VLD package content:
+vld
+6abe35da3cd228b9f46f401dddbcf97884bdf08e (grafted, HEAD, tag: dev/ufs-platform-default-official-2.0.0220)
+
+systemData
+e094c4b2e5fa7bf20e7987baf0a0a93428a5cc85 (grafted, HEAD, tag: static/Chanakya/ufs-platform-default-official-2.0.0220)
+
+dataCollection
+928bde5aa78053a9360dcb20b3faf4c48abf8055 (grafted, HEAD, tag: ufs-ofek-vld-default-official-1.0.286682)
