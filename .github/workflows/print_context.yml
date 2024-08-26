@@ -1,0 +1,15 @@
+name: Print context
+on:
+  workflow_dispatch:
+
+jobs:
+  Print-Context:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print to summary
+        run: echo "Hello world" >> "$GITHUB_STEP_SUMMARY"
+      - name: Print the Github Context
+        id: print-context
+        run: echo "$GITHUB_CONTEXT"
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
