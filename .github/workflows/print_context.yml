@@ -7,7 +7,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Print to summary
-        run: echo "Hello world" >> "$GITHUB_STEP_SUMMARY"
+        env:
+          JOB_ID: ${{ github.job }}
+        run: |
+          echo $JOB_ID
+          echo "Hello world $JOB_ID" >> "$GITHUB_STEP_SUMMARY"
       - name: Print the Github Context
         id: print-context
         run: echo "$GITHUB_CONTEXT"
